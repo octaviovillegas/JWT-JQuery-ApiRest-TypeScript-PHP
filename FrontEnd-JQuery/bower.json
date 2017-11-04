@@ -1,0 +1,17 @@
+{
+  "name": "jquery",
+  "authors": [
+    "octavio <el.octavio.villegas@gmail.com>"
+  ],
+  "description": "ejemplo de jwt",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
