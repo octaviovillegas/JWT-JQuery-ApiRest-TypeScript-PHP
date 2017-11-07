@@ -1,0 +1,25 @@
+
+    <form  (ngSubmit)="enviar()" class="form-horizontal col-sm-8">
+      <div class="form-group row" >
+        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+
+        <div class="col-sm-10">
+          <input type="email" [(ngModel)]="user.email" name='email' required
+          class="form-control" id="inputEmail3" placeholder="Email">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+
+        <div class="col-sm-10">
+          <input type="password" [(ngModel)]="user.clave" name="clave" required
+          class="form-control" id="inputPassword3" placeholder="Password">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-default btn-auth" >Ingresar</button>
+          <!--<a routerLink="/login" class="forgot-pass">Olvido el password?</a>-->
+        </div>
+      </div>
+    </form>
