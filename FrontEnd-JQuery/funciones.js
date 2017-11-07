@@ -33,6 +33,7 @@ function ingresar()
 		
 	
 	},function(error){
+		alert(error.responseText);
 		console.info("error",error);
 	});
 	
@@ -50,6 +51,8 @@ function enviarToken()
         console.info("bien -->",itemResponse);
     }, 
     function(error) {
+
+    	alert(error.responseText);
         console.info("error",error);
     });
 }

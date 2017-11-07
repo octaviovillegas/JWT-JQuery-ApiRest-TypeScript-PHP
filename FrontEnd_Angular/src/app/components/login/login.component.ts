@@ -8,13 +8,13 @@ import { WsService } from '../../services/ws/ws.service';
 // import 'rxjs/add/operator/map';
 // import 'rxjs/add/operator/toPromise';
 
-export class User {
-  public email: string = '';
+export class Usuario {
+  public correo: string = '';
   public clave: string = '';
 
-  constructor( email: string, clave: string)
+  constructor( correo: string, clave: string)
   {
-    this.email = email;
+    this.correo = correo;
     this.clave = clave;
   }
 }
@@ -29,43 +29,28 @@ export class LoginComponent implements OnInit {
   // public email:AbstractControl;
   // public password:AbstractControl;
   // public submitted:boolean = false;
-  user: User = new User('','');
+  unUsuario: Usuario = new Usuario('','');
   url: string = 'http://localhost:8080/servidor/BackEnd-PHP-jwt/api/ingreso/';
 
   constructor( private router: Router, private ws: WsService) {
-    this.user.email = '';
-    // console.log(this.user);
+    this.unUsuario.correo = 'algo';
+    this.unUsuario.clave = 'algo';
+    console.log(this.unUsuario);
 
   }
 
   ngOnInit() {
   }
-  enviarBak()
-  {
-    console.log( this.user );
-    this.ws.get( {'usuario':this.user} )
-    .then( data => {
-      console.log(data);
-      if ( data.token )
-      {
-        localStorage.setItem('token', data.token);
-        this.router.navigateByUrl("/pagina2");
-      }
-    })
-    .catch( e => {
-      console.log(e);
-    } );
-  }
+ 
    enviar()
   {
 
-    var _correo="correo";
-    var _clave="clave";
-    console.log( _correo );
+    //console.info(this.unUsuario);
+  
     this.ws.post( {
-        data: {
-          usuario: _correo,
-          clave: _clave 
+        datosLogin: {
+          usuario: this.unUsuario.correo,
+          clave: this.unUsuario.clave 
       }} )
     .then( data => {
       console.info("data>>>",data);
@@ -76,7 +61,7 @@ export class LoginComponent implements OnInit {
       }
     })
     .catch( e => {
-      console.log(e);
+      console.info(e);
     } );
   }
 

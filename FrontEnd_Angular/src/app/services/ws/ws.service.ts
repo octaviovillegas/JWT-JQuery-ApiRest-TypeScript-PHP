@@ -65,7 +65,7 @@ post(data: Object)
       errMsg = error.message ? error.message : error.toString();
     }
    // console.error( errMsg );
-    console.error( 'CATCH' );
+    console.error( 'CATCH'+error );
     //return Observable.throw(errMsg);
   }
 }
