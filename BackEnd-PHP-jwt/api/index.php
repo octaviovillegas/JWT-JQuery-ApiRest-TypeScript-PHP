@@ -13,6 +13,7 @@ require_once '/clases/usuario.php';
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
 
+$config['determineRouteBeforeAppMiddleware'] = true;
 /*
 
 ¡La primera línea es la más importante! A su vez en el modo de 
@@ -60,7 +61,14 @@ $app->post('/ingreso/', function (Request $request, Response $response) {
 
   }
  
-	return $newResponse;
+	
+  $newResponse
+            ->withHeader('Access-Control-Allow-Origin', 'http://localhost')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods',  'POST');
+
+  return $newResponse;
+
 });
 
 $app->get('/ingreso/', function (Request $request, Response $response,$arg) {    
@@ -92,7 +100,7 @@ $app->get('/ingreso/', function (Request $request, Response $response,$arg) {
   }
  
   return $newResponse;
-});
+   });
 
 
 
@@ -123,4 +131,11 @@ $app->get('/tomarToken[/]', function (Request $request, Response $response) {
 
 });
 
+$app->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+            ->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
 $app->run();
