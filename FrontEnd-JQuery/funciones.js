@@ -12,8 +12,10 @@ function ingresar()
 		 type: "post",
 		url: servidor+"ingreso/",
 		data: {
+	        datosLogin: {
 	        usuario: _correo,
 	        clave: _clave 
+    	}
     	}
    		
 	})

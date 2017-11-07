@@ -33,10 +33,42 @@ $app = new \Slim\App(["settings" => $config]);
 $app->post('/ingreso/', function (Request $request, Response $response) {    
     
 	$token="";
-  $ArrayDeParametros = $request->getParsedBody();
-  
+  $ArrayDeParametros = $request->getParsedBody()['datosLogin'];
+  $usuario = $ArrayDeParametros['usuario'];
+  $clave = $ArrayDeParametros['clave'];
+
  // var_dump($ArrayDeParametros );
-  if(isset( $ArrayDeParametros['usuario']) && isset( $ArrayDeParametros['clave']) )
+  if( $usuario &&  $clave )
+  {
+
+      if( usuario::esValido($usuario,$clave))
+      {
+        $datos=array('usuario'=>$usuario,'clave'=>$clave);
+        $token= AutentificadorJWT::CrearToken($datos);
+        $retorno=array('datos'=> $datos, 'token'=>$token );
+        $newResponse = $response->withJson( $retorno ,200); 
+      }
+      else
+      {
+        $retorno=array('error'=> "no es usuario valido" );
+        $newResponse = $response->withJson( $retorno ,409); 
+      }
+  }else
+  {
+        $retorno=array('error'=> "Faltan los datos del usuario y su clave" );
+        $newResponse = $response->withJson( $retorno  ,411); 
+
+  }
+ 
+	return $newResponse;
+});
+
+$app->get('/ingreso/', function (Request $request, Response $response,$arg) {    
+    
+  $token="";
+
+  $datos=$request->getParam();
+  if(isset( $arg['usuario']) && isset( $arg['clave']) )
   {
       $usuario=$ArrayDeParametros['usuario'];
       $clave= $ArrayDeParametros['clave'];
@@ -56,10 +88,10 @@ $app->post('/ingreso/', function (Request $request, Response $response) {
   }else
   {
         $retorno=array('error'=> "Faltan los datos del usuario y su clave" );
-        $newResponse = $response->withJson( $retorno ,409); 
+        $newResponse = $response->withJson( $datos  ,411); 
   }
  
-	return $newResponse;
+  return $newResponse;
 });
 
 
