@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http, Response } from '@angular/http';
+import { Http, Response ,RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp , AuthConfig } from 'angular2-jwt';
 
 @Injectable()
 export class WsService {
 
   url: string = 'http://localhost:8080/servidor/BackEnd-PHP-jwt/api/';
 
-  constructor(public http: Http, private authHttp: AuthHttp)
+  constructor(public http: Http, private authHttp: AuthHttp , options: RequestOptions)
   {
-
+    //miTokenUTNFRA
+      this.authHttp= new AuthHttp(new AuthConfig({
+      headerName: 'miTokenUTNFRA',
+      tokenName: 'miTokenUTNFRA',
+      tokenGetter: (() => localStorage.getItem('miTokenUTNFRA')),
+      globalHeaders: [{'Content-Type':'application/json'}],
+    }), http, options);
   }
 
   /**
