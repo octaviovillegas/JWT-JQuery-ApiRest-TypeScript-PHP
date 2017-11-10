@@ -10,14 +10,15 @@ export class AutService {
   jwtHelper: JwtHelper = new JwtHelper();
   
   constructor( private router: Router ) {
-    this._token = localStorage.getItem('token');
+    this._token = localStorage.getItem('miTokenUTNFRA');
+    console.info("constructor",this._token);
   }
 
   public isLogued()
   {
     try {
-      // console.log( 'is logued', tokenNotExpired());
-      let rta = tokenNotExpired() || false;
+     console.log( 'is logued', tokenNotExpired('miTokenUTNFRA'));
+      let rta = tokenNotExpired('miTokenUTNFRA') || false;
       return rta;
     } catch (error) {
       return false;
@@ -27,7 +28,7 @@ export class AutService {
   public getToken ()
   {
     try {
-      console.log('getToekn', this.jwtHelper.decodeToken(this._token));
+      console.log('getToken', this.jwtHelper.decodeToken(this._token));
       return this.jwtHelper.decodeToken(this._token);
     } catch (error) {
       return undefined;
@@ -48,7 +49,7 @@ export class AutService {
   public logOut()
   {
     try {
-      localStorage.setItem('token', null);
+      localStorage.setItem('miTokenUTNFRA', null);
       this.router.navigate(['/login']);
     } catch (error) {
       return false;
@@ -62,6 +63,14 @@ export class AutService {
       return this.jwtHelper.decodeToken(this._token).nivel;
     else
       return 1000;
+    
+  }
+   public getData ()
+  {
+    // console.log(this.jwtHelper.decodeToken(this._token));
+   
+      return this.jwtHelper.decodeToken(this._token);
+    
     
   }
 }

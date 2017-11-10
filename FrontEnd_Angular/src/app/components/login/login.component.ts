@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       console.info("data>>>",data);
       if ( data.token )
       {
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('miTokenUTNFRA', data.token);
         this.router.navigateByUrl("/pagina2");
       }
     })

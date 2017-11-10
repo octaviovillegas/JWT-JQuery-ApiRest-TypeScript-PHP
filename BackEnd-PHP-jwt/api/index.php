@@ -44,7 +44,7 @@ $app->post('/ingreso/', function (Request $request, Response $response) {
 
       if( usuario::esValido($usuario,$clave))
       {
-        $datos=array('usuario'=>$usuario,'clave'=>$clave);
+        $datos=array('usuario'=>$usuario,'nivel'=>10);
         $token= AutentificadorJWT::CrearToken($datos);
         $retorno=array('datos'=> $datos, 'token'=>$token );
         $newResponse = $response->withJson( $retorno ,200); 
@@ -80,10 +80,10 @@ $app->get('/ingreso/', function (Request $request, Response $response,$arg) {
   {
       $usuario=$ArrayDeParametros['usuario'];
       $clave= $ArrayDeParametros['clave'];
-
+      $nivel=10;
       if(usuario::esValido($usuario,$clave))
       {
-        $datos=array('usuario'=>$usuario,'clave'=>$clave);
+        $datos=array('usuario'=>$usuario,'nivel'=>$nivel);
         $token= AutentificadorJWT::CrearToken($datos);
         $retorno=array('datos'=> $datos, 'token'=>$token );
         $newResponse = $response->withJson( $retorno ,200); 
@@ -113,7 +113,7 @@ $app->get('/tomarToken[/]', function (Request $request, Response $response) {
 
     try {
 
-      AutentificadorJWT::VerificarToken($token);
+     //AutentificadorJWT::VerificarToken($token);
       $response->getBody()->write(" PHP :Su token es ".$token);  
       $respuesta=usuario::Traertodos();    
       $newResponse = $response->withJson($respuesta); 

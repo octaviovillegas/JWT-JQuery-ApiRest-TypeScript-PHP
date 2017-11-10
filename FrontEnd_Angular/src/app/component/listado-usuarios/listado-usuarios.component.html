@@ -1,0 +1,10 @@
+<p>
+  listado-usuarios works!
+</p>
+<button  class="btn btn-default btn-auth" (click)="traerTodos()">Traer Todos</button>
+<p>Heroes:</p>
+  <ul>
+    <li *ngFor="let usuario of listado">
+      {{ usuario.nombre }}
+    </li>
+  </ul>

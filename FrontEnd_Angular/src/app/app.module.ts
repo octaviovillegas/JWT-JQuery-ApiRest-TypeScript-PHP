@@ -14,6 +14,8 @@ import { WsService }  from './services/ws/ws.service';
 import { AutService } from './services/auth/aut.service';
 import { VerificarJWTService } from './services/verificar-jwt/verificar-jwt.service';
 import { JwtModule } from './jwt/jwt.module';
+import { ListadoUsuariosComponent } from './component/listado-usuarios/listado-usuarios.component';
+import { PerfilUsuarioComponent } from './component/perfil-usuario/perfil-usuario.component';
 
 
 const appRoutes: Routes = [
@@ -23,6 +25,8 @@ const appRoutes: Routes = [
     component: Pagina1Component
   },
   { path: 'pagina2', component: Pagina2Component, canActivate: [VerificarJWTService], },
+  { path: 'listado', component: ListadoUsuariosComponent, canActivate: [VerificarJWTService], },
+  { path: 'perfil', component: PerfilUsuarioComponent, canActivate: [VerificarJWTService], },
   { path: 'login', component: LoginComponent },
   { path: '',   redirectTo: '/pagina1', pathMatch: 'full' },
   { path: '**', component: ErrorComponent }
@@ -36,7 +40,9 @@ const appRoutes: Routes = [
     Pagina1Component,
     Pagina2Component,
     ErrorComponent,
-    LoginComponent
+    LoginComponent,
+    ListadoUsuariosComponent,
+    PerfilUsuarioComponent
   ],
   imports: [
     BrowserModule,

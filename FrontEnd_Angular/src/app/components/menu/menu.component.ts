@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
   }
   salir()
   {
-    localStorage.setItem('token', null);
+    localStorage.setItem('miTokenUTNFRA', null);
     window.alert('Chauuuuuu!!!');
     this.router.navigate(['/login']);
   }
